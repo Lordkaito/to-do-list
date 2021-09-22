@@ -39,6 +39,14 @@ body {
 .title {
   padding: 10px;
   font-size: 1.3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 100;
+}
+
+i {
+  font-size: 1rem;
 }
 
 .task {
@@ -50,17 +58,35 @@ body {
   border-bottom: 1px solid #e0e0e0;
 }
 
+.task p {
+  width: 100%;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
 input[type="text"] {
   outline: none;
   font-size: 1.3rem;
   width: 100%;
-  max-width: 100%;
+  max-width: 95%;
   padding: 10px;
-  border-bottom: 1px solid #e0e0e0;
 }
 
 input[type="checkbox"] {
   margin: 0 10px;
+}
+
+.rotate {
+  transform: rotate(90deg);
+  color: #ccc;
+}
+
+.flex-end {
+  align-self: flex-end;
 }
 
 .delete-container {
@@ -74,4 +100,5 @@ input[type="checkbox"] {
 .delete {
   cursor: pointer;
   display: inline-block;
+  color: #ccc;
 }
