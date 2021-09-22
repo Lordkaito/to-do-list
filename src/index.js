@@ -1,4 +1,3 @@
-// import _ from 'lodash';
 import './style.css';
 
 const itemsContainer = document.querySelector('.items-container');
