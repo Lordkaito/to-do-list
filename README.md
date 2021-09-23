@@ -1,4 +1,4 @@
-# Project Name
+# To-Do List
 
 To-Do List
 
@@ -19,8 +19,10 @@ This is a simple to-do list application built with JS, HTML, and CSS using webpa
 ### Prerequisites
 
 If you wish to run the project locally, please do the following:
+
 1.- Install Node.js and npm if you haven't already.
    To install Node.js, follow the instructions on [Node.js](https://nodejs.org/en/).
+   
    To install npm, run the following command in your terminal:
    ``` bash
    npm install -g npm
