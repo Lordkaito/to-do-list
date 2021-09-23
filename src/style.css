@@ -39,10 +39,6 @@ body {
 .items-container::-webkit-scrollbar-track {
   background-color: #ccc;
 }
-/* 
-.items-container::-webkit-scrollbar-button {
-  background-color: #ccc;
-} */
 
 .container {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);

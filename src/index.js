@@ -1,4 +1,3 @@
-export let items = [];
 import './style.css';
 import { taskCompleted } from './app.js';
 // import { taskCompleted, items } from './app.js';
@@ -27,29 +26,33 @@ title.appendChild(icon);
 deleteText.textContent = 'Clear all completed';
 deleteCont.appendChild(deleteText);
 
+let items = [];
 let indexCont = 0;
 
-  if (localStorage.getItem('items')) {
-    items = [...JSON.parse(localStorage.getItem('items'))];
-    items.forEach(item => {
-      const div = document.createElement('div');
-      div.classList.add('task');
-      div.id = `${indexCont += 1}`
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.checked = item.completed;
-      checkbox.addEventListener('change', (e) => taskCompleted(e, items));
-      const p = document.createElement('p');
-      p.textContent = item.description;
-      const icon = document.createElement('i');
-      icon.classList.add('fas', 'fa-ellipsis-v', 'flex-end');
-      div.appendChild(checkbox);
-      div.appendChild(p);
-      div.appendChild(icon)
-      itemsContainer.appendChild(div);
-    });
-  }
-class item {
+if (localStorage.getItem('items')) {
+  items = [...JSON.parse(localStorage.getItem('items'))];
+  items.forEach((item) => {
+    const div = document.createElement('div');
+    div.classList.add('task');
+    div.id = `${indexCont += 1}`;
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = item.completed;
+    checkbox.addEventListener('change', (e) => taskCompleted(e, items));
+    const p = document.createElement('p');
+    p.textContent = item.description;
+    const icon = document.createElement('i');
+    icon.classList.add('fas', 'fa-ellipsis-v', 'flex-end');
+    div.appendChild(checkbox);
+    div.appendChild(p);
+    div.appendChild(icon);
+    itemsContainer.appendChild(div);
+    if (item.completed) {
+      div.classList.add('completed');
+    }
+  });
+}
+class Item {
   constructor() {
     this.description = '';
     this.completed = false;
@@ -59,7 +62,7 @@ class item {
 
 input.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
-    const newItem = new item();
+    const newItem = new Item();
     const div = document.createElement('div');
     const checkbox = document.createElement('input');
     const text = document.createElement('p');
