@@ -1,8 +1,6 @@
-import { addTask } from "./addAndRemove.js";
-
 const taskCompleted = (e, items, deleteCont) => {
   const complete = e.target;
-  items = [...JSON.parse(localStorage.getItem("items"))];
+  items = [...JSON.parse(localStorage.getItem('items'))];
   if (complete.checked) {
     complete.parentElement.classList.add('completed');
     // eslint-disable-next-line no-plusplus
@@ -15,7 +13,7 @@ const taskCompleted = (e, items, deleteCont) => {
     }
   } else {
     complete.parentElement.classList.remove('completed');
-    deleteCont.classList.remove('enable-btn')
+    deleteCont.classList.remove('enable-btn');
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < items.length; i++) {
       // eslint-disable-next-line eqeqeq

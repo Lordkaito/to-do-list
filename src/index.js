@@ -69,39 +69,3 @@ class Item {
 input.addEventListener('keydown', (e) => addTask(e, items, input, itemsContainer, Item));
 
 deleteText.addEventListener('click', (e) => removeTasks(e, items, deleteCont, Item));
-
-
-
-// input.addEventListener('keypress', (e) => {
-//   if (e.key === 'Enter') {
-//     const newItem = new Item();
-//     const div = document.createElement('div');
-//     const checkbox = document.createElement('input');
-//     const text = document.createElement('p');
-//     const icon = document.createElement('i');
-
-//     div.classList.add('task');
-
-//     newItem.description = input.value;
-//     newItem.id = items.length + 1;
-//     newItem.completed = false;
-
-//     checkbox.type = 'checkbox';
-//     checkbox.classList.add('checkbox');
-//     checkbox.addEventListener('change', taskCompleted);
-
-//     text.textContent = input.value;
-
-//     icon.classList.add('fas', 'fa-ellipsis-v', 'flex-end');
-
-//     div.appendChild(checkbox);
-//     div.appendChild(text);
-//     div.appendChild(icon);
-
-//     itemsContainer.appendChild(div);
-
-//     input.value = '';
-//     items.push(newItem);
-//     localStorage.setItem('items', JSON.stringify(items));
-//   }
-// });
