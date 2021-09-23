@@ -1,5 +1,6 @@
 import './style.css';
 import { taskCompleted } from './app.js';
+import { addTask, removeTasks } from './addAndRemove.js';
 // import { taskCompleted, items } from './app.js';
 
 const itemsContainer = document.querySelector('.items-container');
@@ -13,6 +14,9 @@ const icon = document.createElement('i');
 const enter = document.createElement('i');
 
 input.type = 'text';
+
+input.autofocus = true;
+
 input.setAttribute('placeholder', 'Add new task');
 enter.classList.add('fas', 'fa-level-down-alt', 'rotate');
 inputCont.appendChild(input);
@@ -38,7 +42,7 @@ if (localStorage.getItem('items')) {
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = item.completed;
-    checkbox.addEventListener('change', (e) => taskCompleted(e, items));
+    checkbox.addEventListener('change', (e) => taskCompleted(e, items, deleteCont));
     const p = document.createElement('p');
     p.textContent = item.description;
     const icon = document.createElement('i');
@@ -51,6 +55,8 @@ if (localStorage.getItem('items')) {
       div.classList.add('completed');
     }
   });
+} else {
+  localStorage.setItem('items', JSON.stringify(items));
 }
 class Item {
   constructor() {
@@ -60,36 +66,42 @@ class Item {
   }
 }
 
-input.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') {
-    const newItem = new Item();
-    const div = document.createElement('div');
-    const checkbox = document.createElement('input');
-    const text = document.createElement('p');
-    const icon = document.createElement('i');
+input.addEventListener('keydown', (e) => addTask(e, items, input, itemsContainer, Item));
 
-    div.classList.add('task');
+deleteText.addEventListener('click', (e) => removeTasks(e, items, deleteCont, Item));
 
-    newItem.description = input.value;
-    newItem.id = items.length + 1;
-    newItem.completed = false;
 
-    checkbox.type = 'checkbox';
-    checkbox.classList.add('checkbox');
-    checkbox.addEventListener('change', taskCompleted);
 
-    text.textContent = input.value;
+// input.addEventListener('keypress', (e) => {
+//   if (e.key === 'Enter') {
+//     const newItem = new Item();
+//     const div = document.createElement('div');
+//     const checkbox = document.createElement('input');
+//     const text = document.createElement('p');
+//     const icon = document.createElement('i');
 
-    icon.classList.add('fas', 'fa-ellipsis-v', 'flex-end');
+//     div.classList.add('task');
 
-    div.appendChild(checkbox);
-    div.appendChild(text);
-    div.appendChild(icon);
+//     newItem.description = input.value;
+//     newItem.id = items.length + 1;
+//     newItem.completed = false;
 
-    itemsContainer.appendChild(div);
+//     checkbox.type = 'checkbox';
+//     checkbox.classList.add('checkbox');
+//     checkbox.addEventListener('change', taskCompleted);
 
-    input.value = '';
-    items.push(newItem);
-    localStorage.setItem('items', JSON.stringify(items));
-  }
-});
+//     text.textContent = input.value;
+
+//     icon.classList.add('fas', 'fa-ellipsis-v', 'flex-end');
+
+//     div.appendChild(checkbox);
+//     div.appendChild(text);
+//     div.appendChild(icon);
+
+//     itemsContainer.appendChild(div);
+
+//     input.value = '';
+//     items.push(newItem);
+//     localStorage.setItem('items', JSON.stringify(items));
+//   }
+// });
