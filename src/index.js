@@ -1,6 +1,6 @@
 import './style.css';
 import { taskCompleted } from './app.js';
-import { addTask, removeTasks } from './addAndRemove.js';
+import { addTask, editContent, removeTasks, removeOne } from './addAndRemove.js';
 // import { taskCompleted, items } from './app.js';
 
 const itemsContainer = document.querySelector('.items-container');
@@ -39,17 +39,36 @@ if (localStorage.getItem('items')) {
     const div = document.createElement('div');
     div.classList.add('task');
     div.id = `${indexCont += 1}`;
+
+    const inputContainer = document.createElement('div');
+    inputContainer.classList.add('input-container');
+
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = item.completed;
     checkbox.addEventListener('change', (e) => taskCompleted(e, items, deleteCont));
-    const p = document.createElement('p');
-    p.textContent = item.description;
+
+    const p = document.createElement('input');
+    p.type = 'text';
+    p.setAttribute('readonly', 'readonly');
+    p.value = item.description;
+    p.addEventListener('click', (e) => editContent(e, p, items))
+
+    const iconContainer = document.createElement('div');
+    iconContainer.classList.add('icon-container');
     const icon = document.createElement('i');
     icon.classList.add('fas', 'fa-ellipsis-v', 'flex-end');
-    div.appendChild(checkbox);
-    div.appendChild(p);
-    div.appendChild(icon);
+    const icon2 = document.createElement('i');
+    icon2.classList.add('fas', 'fa-trash-alt', 'flex-end');
+    icon2.addEventListener('click', (e) => removeOne(e, items));
+
+    iconContainer.appendChild(icon2);
+    iconContainer.appendChild(icon);
+    inputContainer.appendChild(checkbox);
+    inputContainer.appendChild(p);
+    div.appendChild(inputContainer);
+    div.appendChild(iconContainer);
+
     itemsContainer.appendChild(div);
     if (item.completed) {
       div.classList.add('completed');
@@ -69,3 +88,14 @@ class Item {
 input.addEventListener('keydown', (e) => addTask(e, items, input, itemsContainer, Item));
 
 deleteText.addEventListener('click', (e) => removeTasks(e, items, deleteCont, Item));
+const refreshPage = () => {
+  // make it spin and after that refresh
+  icon.classList.add('refresh');
+  setTimeout(() => {
+    location.reload();
+  }, 500);
+}
+
+const refresh = document.querySelector('.fa-sync')
+refresh.addEventListener('click', refreshPage);
+console.log(refresh)

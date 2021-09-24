@@ -63,6 +63,8 @@ body {
 
 i {
   font-size: 1rem;
+  cursor: pointer;
+  padding: 5px;
 }
 
 .task {
@@ -96,14 +98,30 @@ input[type="checkbox"] {
   margin: 0 10px;
 }
 
+.input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.fa-trash-alt:hover {
+  color: #ff0000;
+}
+
 .rotate {
   transform: rotate(90deg);
   color: #ccc;
 }
 
-.flex-end {
+/* .flex-end {
   align-self: flex-end;
-}
+} */
 
 .delete-container {
   padding: 15px 0;
@@ -119,8 +137,30 @@ input[type="checkbox"] {
   color: #ccc;
 }
 
+.delete:hover {
+  color: #f60000;
+  transition: all ease-out 0.2s;
+}
+
 .completed {
   text-decoration: line-through;
   opacity: 0.5;
   font-style: italic;
+}
+
+.completed > input {
+  font-style: italic;
+}
+
+.refresh {
+  animation: rotate 0.5s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

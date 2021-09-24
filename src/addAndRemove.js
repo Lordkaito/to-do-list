@@ -7,7 +7,7 @@ const addTask = (e, items, input, itemsContainer, Item) => {
     const newItem = new Item();
     const div = document.createElement('div');
     const checkbox = document.createElement('input');
-    const text = document.createElement('p');
+    const p = document.createElement('input');
     const icon = document.createElement('i');
     div.classList.add('task');
 
@@ -19,12 +19,14 @@ const addTask = (e, items, input, itemsContainer, Item) => {
     checkbox.classList.add('checkbox');
     checkbox.addEventListener('change', taskCompleted);
 
-    text.textContent = input.value;
+    p.value = input.value;
+    p.type = 'text';
+    p.setAttribute('readonly', 'readonly');
 
     icon.classList.add('fas', 'fa-ellipsis-v', 'flex-end');
 
     div.appendChild(checkbox);
-    div.appendChild(text);
+    div.appendChild(p);
     div.appendChild(icon);
 
     itemsContainer.appendChild(div);
@@ -32,6 +34,7 @@ const addTask = (e, items, input, itemsContainer, Item) => {
     input.value = '';
     items.push(newItem);
     localStorage.setItem('items', JSON.stringify(items));
+    location.reload();
   }
 };
 
@@ -67,4 +70,48 @@ const removeTasks = (e, items) => {
   location.reload();
 };
 
-export { addTask, removeTasks };
+const editContent = (e, p, items) => {
+  console.log(e)
+  const edit = e.target;
+  console.log(edit)
+  edit.removeAttribute('readonly');
+  edit.addEventListener('keydown', (e) => {
+    if (e.keyCode === 13) {
+      edit.setAttribute('readonly', 'readonly');
+      edit.value = p.value;
+      items.forEach((item) => {
+        if (item.id == edit.parentElement.parentElement.id) {
+          item.description = edit.value;
+        }
+      });
+      localStorage.setItem('items', JSON.stringify(items));
+    }
+  });
+}
+
+const removeOne = (e, items) => {
+  items = [...JSON.parse(localStorage.getItem('items'))];
+  const remove = e.target;
+  console.log(remove.parentElement.parentElement.id)
+  items.forEach((item) => {
+    if (item.id == remove.parentElement.parentElement.id) {
+      const index = items.indexOf(item);
+      items.splice(index, 1);
+      let i = 0;
+      while (i < items.length) {
+        if (items[i].id > item.id) {
+          // eslint-disable-next-line no-plusplus
+          items[i].id--;
+        }
+        // eslint-disable-next-line no-plusplus
+        i++;
+      }
+      console.log(items)
+    }
+    remove.parentElement.parentElement.remove();
+    localStorage.setItem('items', JSON.stringify(items));
+  });
+};
+
+
+export { addTask, removeTasks, editContent, removeOne };
