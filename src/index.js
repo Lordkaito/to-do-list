@@ -1,5 +1,8 @@
 import './style.css';
 import { taskCompleted } from './app.js';
+import {
+  addTask, editContent, removeTasks, removeOne,
+} from './addAndRemove.js';
 // import { taskCompleted, items } from './app.js';
 
 const itemsContainer = document.querySelector('.items-container');
@@ -13,6 +16,9 @@ const icon = document.createElement('i');
 const enter = document.createElement('i');
 
 input.type = 'text';
+
+input.autofocus = true;
+
 input.setAttribute('placeholder', 'Add new task');
 enter.classList.add('fas', 'fa-level-down-alt', 'rotate');
 inputCont.appendChild(input);
@@ -35,22 +41,43 @@ if (localStorage.getItem('items')) {
     const div = document.createElement('div');
     div.classList.add('task');
     div.id = `${indexCont += 1}`;
+
+    const inputContainer = document.createElement('div');
+    inputContainer.classList.add('input-container');
+
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.checked = item.completed;
-    checkbox.addEventListener('change', (e) => taskCompleted(e, items));
-    const p = document.createElement('p');
-    p.textContent = item.description;
+    checkbox.addEventListener('change', (e) => taskCompleted(e, items, deleteCont));
+
+    const p = document.createElement('input');
+    p.type = 'text';
+    p.setAttribute('readonly', 'readonly');
+    p.value = item.description;
+    p.addEventListener('click', (e) => editContent(e, p, items));
+
+    const iconContainer = document.createElement('div');
+    iconContainer.classList.add('icon-container');
     const icon = document.createElement('i');
     icon.classList.add('fas', 'fa-ellipsis-v', 'flex-end');
-    div.appendChild(checkbox);
-    div.appendChild(p);
-    div.appendChild(icon);
+    const icon2 = document.createElement('i');
+    icon2.classList.add('fas', 'fa-trash-alt', 'flex-end');
+    icon2.addEventListener('click', (e) => removeOne(e, items));
+
+    iconContainer.appendChild(icon2);
+    iconContainer.appendChild(icon);
+    inputContainer.appendChild(checkbox);
+    inputContainer.appendChild(p);
+    div.appendChild(inputContainer);
+    div.appendChild(iconContainer);
+
     itemsContainer.appendChild(div);
     if (item.completed) {
       div.classList.add('completed');
     }
   });
+} else {
+  localStorage.setItem('items', JSON.stringify(items));
 }
 class Item {
   constructor() {
@@ -60,36 +87,17 @@ class Item {
   }
 }
 
-input.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') {
-    const newItem = new Item();
-    const div = document.createElement('div');
-    const checkbox = document.createElement('input');
-    const text = document.createElement('p');
-    const icon = document.createElement('i');
+input.addEventListener('keydown', (e) => addTask(e, items, input, itemsContainer, Item));
 
-    div.classList.add('task');
+deleteText.addEventListener('click', (e) => removeTasks(e, items, deleteCont, Item));
+const refreshPage = () => {
+  // make it spin and after that refresh
+  icon.classList.add('refresh');
+  setTimeout(() => {
+    // eslint-disable-next-line no-restricted-globals
+    location.reload();
+  }, 500);
+};
 
-    newItem.description = input.value;
-    newItem.id = items.length + 1;
-    newItem.completed = false;
-
-    checkbox.type = 'checkbox';
-    checkbox.classList.add('checkbox');
-    checkbox.addEventListener('change', taskCompleted);
-
-    text.textContent = input.value;
-
-    icon.classList.add('fas', 'fa-ellipsis-v', 'flex-end');
-
-    div.appendChild(checkbox);
-    div.appendChild(text);
-    div.appendChild(icon);
-
-    itemsContainer.appendChild(div);
-
-    input.value = '';
-    items.push(newItem);
-    localStorage.setItem('items', JSON.stringify(items));
-  }
-});
+const refresh = document.querySelector('.fa-sync');
+refresh.addEventListener('click', refreshPage);
