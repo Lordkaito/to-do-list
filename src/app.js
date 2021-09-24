@@ -1,7 +1,6 @@
-const taskCompleted = (e, items, deleteCont) => {
+const taskCompleted = (e, items) => {
   const complete = e.target;
   items = [...JSON.parse(localStorage.getItem('items'))];
-  console.log(complete)
   if (complete.checked) {
     complete.parentElement.classList.add('completed');
     // eslint-disable-next-line no-plusplus

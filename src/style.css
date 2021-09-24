@@ -111,7 +111,7 @@ input[type="checkbox"] {
 }
 
 .fa-trash-alt:hover {
-  color: #ff0000;
+  color: #ff0;
 }
 
 .rotate {
@@ -160,6 +160,7 @@ input[type="checkbox"] {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

@@ -34,6 +34,7 @@ const addTask = (e, items, input, itemsContainer, Item) => {
     input.value = '';
     items.push(newItem);
     localStorage.setItem('items', JSON.stringify(items));
+    // eslint-disable-next-line no-restricted-globals
     location.reload();
   }
 };
@@ -71,15 +72,14 @@ const removeTasks = (e, items) => {
 };
 
 const editContent = (e, p, items) => {
-  console.log(e)
   const edit = e.target;
-  console.log(edit)
   edit.removeAttribute('readonly');
   edit.addEventListener('keydown', (e) => {
     if (e.keyCode === 13) {
       edit.setAttribute('readonly', 'readonly');
       edit.value = p.value;
       items.forEach((item) => {
+        // eslint-disable-next-line eqeqeq
         if (item.id == edit.parentElement.parentElement.id) {
           item.description = edit.value;
         }
@@ -87,13 +87,13 @@ const editContent = (e, p, items) => {
       localStorage.setItem('items', JSON.stringify(items));
     }
   });
-}
+};
 
 const removeOne = (e, items) => {
   items = [...JSON.parse(localStorage.getItem('items'))];
   const remove = e.target;
-  console.log(remove.parentElement.parentElement.id)
   items.forEach((item) => {
+    // eslint-disable-next-line eqeqeq
     if (item.id == remove.parentElement.parentElement.id) {
       const index = items.indexOf(item);
       items.splice(index, 1);
@@ -106,12 +106,12 @@ const removeOne = (e, items) => {
         // eslint-disable-next-line no-plusplus
         i++;
       }
-      console.log(items)
     }
     remove.parentElement.parentElement.remove();
     localStorage.setItem('items', JSON.stringify(items));
   });
 };
 
-
-export { addTask, removeTasks, editContent, removeOne };
+export {
+  addTask, removeTasks, editContent, removeOne,
+};

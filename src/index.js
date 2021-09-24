@@ -1,6 +1,8 @@
 import './style.css';
 import { taskCompleted } from './app.js';
-import { addTask, editContent, removeTasks, removeOne } from './addAndRemove.js';
+import {
+  addTask, editContent, removeTasks, removeOne,
+} from './addAndRemove.js';
 // import { taskCompleted, items } from './app.js';
 
 const itemsContainer = document.querySelector('.items-container');
@@ -52,7 +54,7 @@ if (localStorage.getItem('items')) {
     p.type = 'text';
     p.setAttribute('readonly', 'readonly');
     p.value = item.description;
-    p.addEventListener('click', (e) => editContent(e, p, items))
+    p.addEventListener('click', (e) => editContent(e, p, items));
 
     const iconContainer = document.createElement('div');
     iconContainer.classList.add('icon-container');
@@ -92,10 +94,10 @@ const refreshPage = () => {
   // make it spin and after that refresh
   icon.classList.add('refresh');
   setTimeout(() => {
+    // eslint-disable-next-line no-restricted-globals
     location.reload();
   }, 500);
-}
+};
 
-const refresh = document.querySelector('.fa-sync')
+const refresh = document.querySelector('.fa-sync');
 refresh.addEventListener('click', refreshPage);
-console.log(refresh)
