@@ -13,7 +13,7 @@ This is a simple to-do list application built with JS, HTML, and CSS using webpa
 
 ## Live Demo
 
-[Live Demo](https://silly-poincare-6174f7.netlify.app/)
+[Live Demo](https://lordkaito.github.io/to-do-list/dist/)
 
 
 ### Prerequisites
