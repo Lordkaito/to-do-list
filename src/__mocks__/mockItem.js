@@ -1,10 +1,10 @@
-import { remove } from '../dummyDOM.js';
-let items = [
-  { id: 1, description: 'item 1', complete: false },
-  { id: 2, description: 'item 2', complete: false },
-  { id: 3, description: 'item 3', complete: false },
-];
+import { checkEvent, remove, inputEvent } from '../dummyDOM.js';
 const removeOne = () => {
+  let items = [
+    { id: 1, description: 'item 1', complete: false },
+    { id: 2, description: 'item 2', complete: false },
+    { id: 3, description: 'item 3', complete: false },
+  ];
   
 
   items.forEach((item) => {
@@ -46,31 +46,104 @@ const addTask = () => {
 };
 
 const taskCompleted = () => {
-  // const complete = e.target;
-  // items = [...JSON.parse(localStorage.getItem('items'))];
-  // if (complete.checked) {
-    // complete.parentElement.classList.add('completed');
+  let items = [
+    { id: 1, description: 'item 1', complete: false },
+    { id: 2, description: 'item 2', complete: false },
+    { id: 3, description: 'item 3', complete: false },
+  ];
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < items.length; i++) {
       // eslint-disable-next-line eqeqeq
-      if (remove.parentNode.parentNode.id == items[i].id) {
-        items[i].completed = true;
+      if (checkEvent.parentNode.parentNode.id == items[i].id) {
+        items[i].complete = true;
+      
+      }
+    }
+ 
+  return items;
+};
+
+const taskUncompleted = () => {
+  let items = [
+    { id: 1, description: 'item 1', complete: true },
+    { id: 2, description: 'item 2', complete: false },
+    { id: 3, description: 'item 3', complete: false },
+  ];
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < items.length; i++) {
+      // eslint-disable-next-line eqeqeq
+      if (checkEvent.parentNode.parentNode.id == items[i].id) {
+        items[i].complete = false;
+      }
+    }
+
+  return items;
+};
+
+const removeTasks = () => {
+  let items = [
+    { id: 1, description: 'item 1', complete: true },
+    { id: 2, description: 'item 2', complete: true },
+    { id: 3, description: 'item 3', complete: false },
+  ];
+  // const checked = document.querySelectorAll('input[type="checkbox"]');
+  // checked.forEach((checkbox) => {
+  //   if (checkbox.checked) {
+  //     checkbox.parentElement.remove();
+  //   }
+  // });
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < items.length; i++) {
+    items.filter((item) => {
+      if (item.complete) {
+        const index = items.indexOf(item);
+        items.splice(index, 1);
+        let i = 0;
+        while (i < items.length) {
+          if (items[i].id > item.id) {
+            // eslint-disable-next-line no-plusplus
+            items[i].id--;
+          }
+          // eslint-disable-next-line no-plusplus
+          i++;
+        }
         // localStorage.setItem('items', JSON.stringify(items));
       }
-    }
-  // } else {
-    complete.parentElement.classList.remove('completed');
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < items.length; i++) {
-      // eslint-disable-next-line eqeqeq
-      if (complete.parentNode.parentNode.id == items[i].id) {
-        items[i].completed = false;
-        localStorage.setItem('items', JSON.stringify(items));
-      }
-    }
-  // }
+      return item;
+    });
+  }
+  
+  return items;
+ 
 };
+
+const editContent = (string) => {
+  let items = [
+    { id: 1, description: 'item 1', complete: true },
+    { id: 2, description: 'item 2', complete: true },
+    { id: 3, description: 'item 3', complete: false },
+  ];
+  // const edit = e.target;
+  inputEvent.removeAttribute('readonly');
+  inputEvent.value = string;
+  
+      // edit.setAttribute('readonly', 'readonly');
+      // inputEvent.value = p.value;
+  items.forEach((item) => {
+    // eslint-disable-next-line eqeqeq
+    if (item.id == inputEvent.parentElement.parentElement.id) {
+      item.description = inputEvent.value;
+    }
+  });
+  return items;
+    
+  
+};
+
 
 exports.removeOne = removeOne;
 exports.addTask = addTask;
 exports.taskCompleted = taskCompleted;
+exports.taskUncompleted = taskUncompleted;
+exports.removeTasks = removeTasks;
+exports.editContent = editContent;
