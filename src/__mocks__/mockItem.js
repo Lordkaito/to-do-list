@@ -1,11 +1,11 @@
 import { remove } from '../dummyDOM.js';
-
+let items = [
+  { id: 1, description: 'item 1', complete: false },
+  { id: 2, description: 'item 2', complete: false },
+  { id: 3, description: 'item 3', complete: false },
+];
 const removeOne = () => {
-  let items = [
-    { id: 1, description: 'item 1', complete: false },
-    { id: 2, description: 'item 2', complete: false },
-    { id: 3, description: 'item 3', complete: false },
-  ];
+  
 
   items.forEach((item) => {
     // eslint-disable-next-line eqeqeq
@@ -45,5 +45,32 @@ const addTask = () => {
   return items;
 };
 
+const taskCompleted = () => {
+  // const complete = e.target;
+  // items = [...JSON.parse(localStorage.getItem('items'))];
+  // if (complete.checked) {
+    // complete.parentElement.classList.add('completed');
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < items.length; i++) {
+      // eslint-disable-next-line eqeqeq
+      if (remove.parentNode.parentNode.id == items[i].id) {
+        items[i].completed = true;
+        // localStorage.setItem('items', JSON.stringify(items));
+      }
+    }
+  // } else {
+    complete.parentElement.classList.remove('completed');
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < items.length; i++) {
+      // eslint-disable-next-line eqeqeq
+      if (complete.parentNode.parentNode.id == items[i].id) {
+        items[i].completed = false;
+        localStorage.setItem('items', JSON.stringify(items));
+      }
+    }
+  // }
+};
+
 exports.removeOne = removeOne;
 exports.addTask = addTask;
+exports.taskCompleted = taskCompleted;
