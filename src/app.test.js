@@ -4,11 +4,9 @@ jest.mock('./mockItem');
 const removeOne = require('./mockItem.js');
 const addTask = require('./mockItem.js');
 const taskCompleted = require('./mockItem.js');
-const taskUncompleted = require('./mockItem.js')
-const removeTasks = require('./mockItem.js')
-const editContent = require('./mockItem.js')
-
-
+const taskUncompleted = require('./mockItem.js');
+const removeTasks = require('./mockItem.js');
+const editContent = require('./mockItem.js');
 
 describe('should remove an item', () => {
   test('remove item with index', () => {
@@ -37,8 +35,8 @@ describe('should add an item', () => {
   });
 });
 
-describe('should check status', ()=> {
-  test('status should be true', ()=> {
+describe('should check status', () => {
+  test('status should be true', () => {
     expect(taskCompleted.taskCompleted()).toEqual([
       { id: 1, description: 'item 1', complete: true },
       { id: 2, description: 'item 2', complete: false },
@@ -50,24 +48,24 @@ describe('should check status', ()=> {
       { id: 1, description: 'item 1', complete: false },
       { id: 2, description: 'item 2', complete: false },
       { id: 3, description: 'item 3', complete: false },
-    ])
-  })
+    ]);
+  });
 });
 
-describe('should remove all completed items', ()=> {
+describe('should remove all completed items', () => {
   test('should remove items with status true', () => {
-    expect((removeTasks.removeTasks())).toEqual( 
-        [ { id: 1, description: 'item 3', complete: false } ])
-  })
+    expect((removeTasks.removeTasks())).toEqual(
+      [{ id: 1, description: 'item 3', complete: false }],
+    );
+  });
 });
 
-
-describe('should edit the input content', ()=> {
+describe('should edit the input content', () => {
   test('should edit', () => {
     expect(editContent.editContent('This is new input value')).toEqual([
       { id: 1, description: 'This is new input value', complete: true },
       { id: 2, description: 'item 2', complete: true },
       { id: 3, description: 'item 3', complete: false },
-    ])
-  })
-})
+    ]);
+  });
+});

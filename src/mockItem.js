@@ -40,7 +40,7 @@ const addTask = (e, items, input, itemsContainer, Item) => {
 
     checkbox.type = 'checkbox';
     checkbox.classList.add('checkbox');
-    // eslint-disable-next-line no-undef
+    // eslint-disable-next-line no-use-before-define
     checkbox.addEventListener('change', taskCompleted);
 
     p.value = input.value;
@@ -88,4 +88,3 @@ const taskCompleted = (e, items) => {
     }
   }
 };
-

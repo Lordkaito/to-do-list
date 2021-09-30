@@ -1,11 +1,11 @@
 import { checkEvent, remove, inputEvent } from '../dummyDOM.js';
+
 const removeOne = () => {
   let items = [
     { id: 1, description: 'item 1', complete: false },
     { id: 2, description: 'item 2', complete: false },
     { id: 3, description: 'item 3', complete: false },
   ];
-  
 
   items.forEach((item) => {
     // eslint-disable-next-line eqeqeq
@@ -46,42 +46,41 @@ const addTask = () => {
 };
 
 const taskCompleted = () => {
-  let items = [
+  const items = [
     { id: 1, description: 'item 1', complete: false },
     { id: 2, description: 'item 2', complete: false },
     { id: 3, description: 'item 3', complete: false },
   ];
     // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < items.length; i++) {
-      // eslint-disable-next-line eqeqeq
-      if (checkEvent.parentNode.parentNode.id == items[i].id) {
-        items[i].complete = true;
-      
-      }
+  for (let i = 0; i < items.length; i++) {
+    // eslint-disable-next-line eqeqeq
+    if (checkEvent.parentNode.parentNode.id == items[i].id) {
+      items[i].complete = true;
     }
- 
+  }
+
   return items;
 };
 
 const taskUncompleted = () => {
-  let items = [
+  const items = [
     { id: 1, description: 'item 1', complete: true },
     { id: 2, description: 'item 2', complete: false },
     { id: 3, description: 'item 3', complete: false },
   ];
     // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < items.length; i++) {
-      // eslint-disable-next-line eqeqeq
-      if (checkEvent.parentNode.parentNode.id == items[i].id) {
-        items[i].complete = false;
-      }
+  for (let i = 0; i < items.length; i++) {
+    // eslint-disable-next-line eqeqeq
+    if (checkEvent.parentNode.parentNode.id == items[i].id) {
+      items[i].complete = false;
     }
+  }
 
   return items;
 };
 
 const removeTasks = () => {
-  let items = [
+  const items = [
     { id: 1, description: 'item 1', complete: true },
     { id: 2, description: 'item 2', complete: true },
     { id: 3, description: 'item 3', complete: false },
@@ -112,13 +111,12 @@ const removeTasks = () => {
       return item;
     });
   }
-  
+
   return items;
- 
 };
 
 const editContent = (string) => {
-  let items = [
+  const items = [
     { id: 1, description: 'item 1', complete: true },
     { id: 2, description: 'item 2', complete: true },
     { id: 3, description: 'item 3', complete: false },
@@ -126,9 +124,9 @@ const editContent = (string) => {
   // const edit = e.target;
   inputEvent.removeAttribute('readonly');
   inputEvent.value = string;
-  
-      // edit.setAttribute('readonly', 'readonly');
-      // inputEvent.value = p.value;
+
+  // edit.setAttribute('readonly', 'readonly');
+  // inputEvent.value = p.value;
   items.forEach((item) => {
     // eslint-disable-next-line eqeqeq
     if (item.id == inputEvent.parentElement.parentElement.id) {
@@ -136,10 +134,7 @@ const editContent = (string) => {
     }
   });
   return items;
-    
-  
 };
-
 
 exports.removeOne = removeOne;
 exports.addTask = addTask;
