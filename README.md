@@ -53,6 +53,21 @@ npm start
 ```
 also you can run ``` npm run watch ``` to make webpack watch the changes and rebuild the project without having to run the build command again.
 
+## Tests
+
+If you want to run the tests, do the following:
+1.- Install Node.js and npm if you haven't already. Or you can use yarn if you prefer.
+
+2.- Install Jest using npm or yarn. You can check here how to do it: [Jest](https://jestjs.io/es-ES/docs/getting-started).
+
+3.- Run ``` npm test ``` or ``` yarn test ``` to run the tests.
+
+Or
+
+You can run ``` git clone https://github.com/Lordkaito/to-do-list.git ``` to clone the repository and avoid all the installation steps because tests are set as a dependency.
+
+Enjoy!
+
 👤 **Author1**
 
 - GitHub: [@Lordkaito](https://github.com/lordkaito)

@@ -1,4 +1,4 @@
-import { remove } from '../dummyDOM.js';
+import { checkEvent, remove, inputEvent } from '../dummyDOM.js';
 
 const removeOne = () => {
   let items = [
@@ -8,18 +8,17 @@ const removeOne = () => {
   ];
 
   items.forEach((item) => {
-    // eslint-disable-next-line eqeqeq
-    if (item.id == remove.parentElement.parentElement.id) {
+    const removeParent = parseInt(remove.parentElement.parentElement.id, 10);
+    if (item.id === removeParent) {
       const index = items.indexOf(item);
       items.splice(index, 1);
       let i = 0;
       while (i < items.length) {
         if (items[i].id > item.id) {
-          // eslint-disable-next-line no-plusplus
-          items[i].id--;
+          items[i].id -= 1;
         }
-        // eslint-disable-next-line no-plusplus
-        i++;
+
+        i += 1;
       }
     }
     remove.parentElement.parentElement.remove();
@@ -41,9 +40,90 @@ const addTask = () => {
   newItem.completed = false;
 
   items.push(newItem);
-  // eslint-disable-next-line no-restricted-globals
+  return items;
+};
+
+const taskCompleted = () => {
+  const items = [
+    { id: 1, description: 'item 1', complete: false },
+    { id: 2, description: 'item 2', complete: false },
+    { id: 3, description: 'item 3', complete: false },
+  ];
+
+  for (let i = 0; i < items.length; i += 1) {
+    const removeParent = parseInt(checkEvent.parentNode.parentNode.id, 10);
+    if (removeParent === items[i].id) {
+      items[i].complete = true;
+    }
+  }
+  return items;
+};
+
+const taskUncompleted = () => {
+  const items = [
+    { id: 1, description: 'item 1', complete: true },
+    { id: 2, description: 'item 2', complete: false },
+    { id: 3, description: 'item 3', complete: false },
+  ];
+
+  for (let i = 0; i < items.length; i += 1) {
+    const removeParent = parseInt(checkEvent.parentNode.parentNode.id, 10);
+    if (removeParent === items[i].id) {
+      items[i].complete = false;
+    }
+  }
+
+  return items;
+};
+
+const removeTasks = () => {
+  const items = [
+    { id: 1, description: 'item 1', complete: true },
+    { id: 2, description: 'item 2', complete: true },
+    { id: 3, description: 'item 3', complete: false },
+  ];
+
+  for (let i = 0; i < items.length; i += 1) {
+    items.filter((item) => {
+      if (item.complete) {
+        const index = items.indexOf(item);
+        items.splice(index, 1);
+        let i = 0;
+        while (i < items.length) {
+          if (items[i].id > item.id) {
+            items[i].id -= 1;
+          }
+          i += 1;
+        }
+      }
+      return item;
+    });
+  }
+
+  return items;
+};
+
+const editContent = (string) => {
+  const items = [
+    { id: 1, description: 'item 1', complete: true },
+    { id: 2, description: 'item 2', complete: true },
+    { id: 3, description: 'item 3', complete: false },
+  ];
+  inputEvent.removeAttribute('readonly');
+  inputEvent.value = string;
+  items.forEach((item) => {
+    const removeParent = parseInt(inputEvent.parentElement.parentElement.id, 10);
+
+    if (item.id === removeParent) {
+      item.description = inputEvent.value;
+    }
+  });
   return items;
 };
 
 exports.removeOne = removeOne;
 exports.addTask = addTask;
+exports.taskCompleted = taskCompleted;
+exports.taskUncompleted = taskUncompleted;
+exports.removeTasks = removeTasks;
+exports.editContent = editContent;
