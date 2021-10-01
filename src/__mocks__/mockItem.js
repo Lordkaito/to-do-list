@@ -8,18 +8,17 @@ const removeOne = () => {
   ];
 
   items.forEach((item) => {
-    // eslint-disable-next-line eqeqeq
-    if (item.id == remove.parentElement.parentElement.id) {
+    const removeParent = parseInt(remove.parentElement.parentElement.id, 10);
+    if (item.id === removeParent) {
       const index = items.indexOf(item);
       items.splice(index, 1);
       let i = 0;
       while (i < items.length) {
         if (items[i].id > item.id) {
-          // eslint-disable-next-line no-plusplus
-          items[i].id--;
+          items[i].id -= 1;
         }
-        // eslint-disable-next-line no-plusplus
-        i++;
+
+        i += 1;
       }
     }
     remove.parentElement.parentElement.remove();
@@ -41,7 +40,6 @@ const addTask = () => {
   newItem.completed = false;
 
   items.push(newItem);
-  // eslint-disable-next-line no-restricted-globals
   return items;
 };
 
@@ -51,14 +49,13 @@ const taskCompleted = () => {
     { id: 2, description: 'item 2', complete: false },
     { id: 3, description: 'item 3', complete: false },
   ];
-    // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < items.length; i++) {
-    // eslint-disable-next-line eqeqeq
-    if (checkEvent.parentNode.parentNode.id == items[i].id) {
+
+  for (let i = 0; i < items.length; i += 1) {
+    const removeParent = parseInt(checkEvent.parentNode.parentNode.id, 10);
+    if (removeParent === items[i].id) {
       items[i].complete = true;
     }
   }
-
   return items;
 };
 
@@ -68,10 +65,10 @@ const taskUncompleted = () => {
     { id: 2, description: 'item 2', complete: false },
     { id: 3, description: 'item 3', complete: false },
   ];
-    // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < items.length; i++) {
-    // eslint-disable-next-line eqeqeq
-    if (checkEvent.parentNode.parentNode.id == items[i].id) {
+
+  for (let i = 0; i < items.length; i += 1) {
+    const removeParent = parseInt(checkEvent.parentNode.parentNode.id, 10);
+    if (removeParent === items[i].id) {
       items[i].complete = false;
     }
   }
@@ -85,14 +82,8 @@ const removeTasks = () => {
     { id: 2, description: 'item 2', complete: true },
     { id: 3, description: 'item 3', complete: false },
   ];
-  // const checked = document.querySelectorAll('input[type="checkbox"]');
-  // checked.forEach((checkbox) => {
-  //   if (checkbox.checked) {
-  //     checkbox.parentElement.remove();
-  //   }
-  // });
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < items.length; i++) {
+
+  for (let i = 0; i < items.length; i += 1) {
     items.filter((item) => {
       if (item.complete) {
         const index = items.indexOf(item);
@@ -100,13 +91,10 @@ const removeTasks = () => {
         let i = 0;
         while (i < items.length) {
           if (items[i].id > item.id) {
-            // eslint-disable-next-line no-plusplus
-            items[i].id--;
+            items[i].id -= 1;
           }
-          // eslint-disable-next-line no-plusplus
-          i++;
+          i += 1;
         }
-        // localStorage.setItem('items', JSON.stringify(items));
       }
       return item;
     });
@@ -121,15 +109,12 @@ const editContent = (string) => {
     { id: 2, description: 'item 2', complete: true },
     { id: 3, description: 'item 3', complete: false },
   ];
-  // const edit = e.target;
   inputEvent.removeAttribute('readonly');
   inputEvent.value = string;
-
-  // edit.setAttribute('readonly', 'readonly');
-  // inputEvent.value = p.value;
   items.forEach((item) => {
-    // eslint-disable-next-line eqeqeq
-    if (item.id == inputEvent.parentElement.parentElement.id) {
+    const removeParent = parseInt(inputEvent.parentElement.parentElement.id, 10);
+
+    if (item.id === removeParent) {
       item.description = inputEvent.value;
     }
   });
