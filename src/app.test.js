@@ -8,7 +8,7 @@ const taskUncompleted = require('./mockItem.js');
 const removeTasks = require('./mockItem.js');
 const editContent = require('./mockItem.js');
 
-//test for remove only one item
+// test for remove only one item
 describe('should remove an item', () => {
   test('remove item with index', () => {
     expect(removeOne.removeOne()).toEqual([
@@ -24,7 +24,7 @@ describe('should remove an item', () => {
   });
 });
 
-//test for adding an item
+// test for adding an item
 describe('should add an item', () => {
   test('should add an item to the array of obj', () => {
     expect(addTask.addTask()).toEqual([{ id: 1, description: 'Description test 1', completed: false }]);
@@ -37,7 +37,7 @@ describe('should add an item', () => {
   });
 });
 
-//test if status is complete
+// test if status is complete
 describe('should check status', () => {
   test('status should be true', () => {
     expect(taskCompleted.taskCompleted()).toEqual([
@@ -55,7 +55,7 @@ describe('should check status', () => {
   });
 });
 
-//test for clearing all completed items
+// test for clearing all completed items
 describe('should remove all completed items', () => {
   test('should remove items with status true', () => {
     expect((removeTasks.removeTasks())).toEqual(
@@ -64,7 +64,7 @@ describe('should remove all completed items', () => {
   });
 });
 
-//test for editing an item content
+// test for editing an item content
 describe('should edit the input content', () => {
   test('should edit', () => {
     expect(editContent.editContent('This is new input value')).toEqual([
